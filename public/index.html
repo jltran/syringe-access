@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Syringe Access</title>
+    <link rel="stylesheet" href="./assets/foundation.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400|Merriweather:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body ng-app="syringeApp">
+    <div class="text-center"><i id="van" class="fa fa-ambulance fa-4x"></i>
+      <h1>Syringe Access</h1>
+    </div>
+    <div ng-controller="SearchCtrl">
+      <div class="row">
+        <input type="text" ng-model="query">
+      </div>
+      <div class="row">
+        <div class="small-12 medium-8 columns map"><map center="37.802494, -122.257831" zoom="12">
+            <marker ng-repeat="location in pharmdata | filter: query" position="{{location.address}}"></marker></map>
+          <!--map(center="current-location", zoom="12")-->
+        </div>
+        <div class="small-12 medium-4 columns">
+          <div ng-repeat="location in pharmdata | filter: query" ng-click="centerMap(location.address); highlightDiv($index)" class="pharmacydata">
+            <h3 ng-class="{'darken':$index==selectedIndex}" class="lighten">{{location.name | uppercase}}</h3>
+            <h6><b>{{location.address | uppercase}}</b></h6>
+            <h6><b>{{location.phone}}</b></h6>
+            <blockquote ng-class="{'show':$index==selectedIndex}" class="hidden review">
+              <div class="row">
+                <div class="small-4 columns">
+                  <div class="plain text-right">Reviewer:</div>
+                </div>
+                <div class="small-8 columns">
+                  <div class="plain text-left">{{location.review.reviewer}}</div>
+                </div>
+                <div class="small-4 columns">
+                  <div class="plain text-right">Stars:</div>
+                </div>
+                <div class="small-8 columns">
+                  <div class="plain text-left">{{location.review.stars}}</div>
+                </div>
+                <div class="small-4 columns">
+                  <div class="plain text-right">Impression:</div>
+                </div>
+                <div class="small-8 columns">
+                  <div class="plain text-left">{{location.review.impression}}</div>
+                </div>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <h1>Enter New Information Here</h1>
+        <form>
+          <div class="row">
+            <div class="large-12 columns">
+              <input type="text" placeholder="Name" ng-model="data.name">
+              <input type="text" placeholder="Address" ng-model="data.address">
+              <input type="text" placeholder="Phone" ng-model="data.phone">
+              <input type="text" placeholder="Reviewer" ng-model="data.reviewer">
+              <input type="text" placeholder="Stars" ng-model="data.stars">
+              <input type="text" placeholder="Impression" ng-model="data.impression">
+              <button type="submit" ng-click="createPharm()">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="./assets/jquery.min.js">       </script>
+    <script src="./assets/angular.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js"></script>
+    <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.min.js"></script>
+    <script src="./core.js"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+#van {
+  margin-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.plain {
+  font-size: 0.75em;
+  margin: 0px;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+h1, h3 {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+}
+
+h3 {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+h6 {
+  font-family: "Lato", sans-serif;
+  font-size: 0.5em;
+  margin: 0;
+}
+
+.lighten {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.darken {
+  color: black;
+}
+
+.pharmacydata {
+  cursor: pointer;
+}
