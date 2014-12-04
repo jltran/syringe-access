@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Syringe Access</title>
-    <link rel="stylesheet" href="./assets/foundation.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400|Merriweather:400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="./style.css">
@@ -13,7 +13,7 @@
     </div>
     <div ng-controller="SearchCtrl">
       <div class="row">
-        <input type="text" ng-model="query">
+        <input type="text" ng-model="query" placeholder="Enter information here to search">
       </div>
       <div class="row">
         <div class="small-12 medium-8 columns map"><map center="37.802494, -122.257831" zoom="12">
@@ -21,8 +21,8 @@
           <!--map(center="current-location", zoom="12")-->
         </div>
         <div class="small-12 medium-4 columns">
-          <div ng-repeat="location in pharmdata | filter: query" ng-click="centerMap(location.address); highlightDiv($index)" class="pharmacydata">
-            <h3 ng-class="{'darken':$index==selectedIndex}" class="lighten">{{location.name | uppercase}}</h3>
+          <div ng-repeat="location in pharmdata | filter: query | limitTo:5" ng-click="centerMap(location.address); highlightDiv($index)" class="pharmacydata">
+            <h4 ng-class="{'darken':$index==selectedIndex}" ng-click="closeDiv($index)" class="lighten">{{location.name | uppercase}}</h4>
             <h6><b>{{location.address | uppercase}}</b></h6>
             <h6><b>{{location.phone}}</b></h6>
             <blockquote ng-class="{'show':$index==selectedIndex}" class="hidden review">
@@ -47,21 +47,38 @@
                 </div>
               </div>
             </blockquote>
+            <!--.row
+            .small-5.columns.small-offset-7
+                .button.tiny.hidden(ng-class="{'show':$index==selectedIndex}") Add Review
+                
+            -->
           </div>
         </div>
       </div>
       <div class="text-center">
-        <h1>Enter New Information Here</h1>
+        <h4 class="spacing">Create a Review</h4>
         <form>
           <div class="row">
             <div class="large-12 columns">
-              <input type="text" placeholder="Name" ng-model="data.name">
-              <input type="text" placeholder="Address" ng-model="data.address">
-              <input type="text" placeholder="Phone" ng-model="data.phone">
-              <input type="text" placeholder="Reviewer" ng-model="data.reviewer">
-              <input type="text" placeholder="Stars" ng-model="data.stars">
+              <label class="text-left">Pharmacy Name</label>
+              <input type="text" placeholder="Pharmacy Name" ng-model="data.name">
+              <label class="text-left">Pharmacy Address</label>
+              <input type="text" placeholder="Pharmacy Address" ng-model="data.address">
+              <label class="text-left">Pharmacy Phone Number</label>
+              <input type="text" placeholder="Pharmacy Phone Number" ng-model="data.phone">
+              <label class="text-left">Reviewer (you)</label>
+              <input type="text" placeholder="Reviewer (you)" ng-model="data.reviewer">
+              <label class="text-left">Stars</label>
+              <select type="text" ng-model="data.stars"><span class="prefix">Stars</span>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+              <label class="text-left">Impression</label>
               <input type="text" placeholder="Impression" ng-model="data.impression">
-              <button type="submit" ng-click="createPharm()">Add</button>
+              <button type="submit" ng-click="createPharm()" class="small">Add Review</button>
             </div>
           </div>
         </form>

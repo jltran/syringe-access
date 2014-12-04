@@ -2,7 +2,7 @@ doctype
 html
     head
         title Syringe Access
-        link(rel="stylesheet", href="./assets/foundation.min.css")
+        link(rel="stylesheet", href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css")
         link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css")
         link(href='http://fonts.googleapis.com/css?family=Lato:300,400|Merriweather:400,700' rel='stylesheet',type='text/css')
         link(rel="stylesheet", href="./style.css")
@@ -14,15 +14,15 @@ html
             h1 Syringe Access
         div(ng-controller="SearchCtrl")
             .row
-                input(type="text", ng-model="query")
+                input(type="text", ng-model="query",placeholder="Enter information here to search")
             .row
                 .small-12.medium-8.columns.map
                     map(center="37.802494, -122.257831",zoom="12")
                         marker(ng-repeat="location in pharmdata | filter: query", position="{{location.address}}")
                     //map(center="current-location", zoom="12")
                 .small-12.medium-4.columns
-                    div.pharmacydata(ng-repeat = "location in pharmdata | filter: query" ,ng-click="centerMap(location.address); highlightDiv($index)")
-                        h3.lighten(ng-class="{'darken':$index==selectedIndex}") {{location.name | uppercase}}
+                    div.pharmacydata(ng-repeat = "location in pharmdata | filter: query | limitTo:5" ,ng-click="centerMap(location.address); highlightDiv($index)") 
+                        h4.lighten(ng-class="{'darken':$index==selectedIndex}", ng-click="closeDiv($index)") {{location.name | uppercase}}
                         h6
                             b {{location.address | uppercase}}
                         h6 
@@ -42,19 +42,34 @@ html
                                     .plain.text-right Impression:
                                 .small-8.columns
                                     .plain.text-left {{location.review.impression}}
+                        //.row
+                            .small-5.columns.small-offset-7
+                                .button.tiny.hidden(ng-class="{'show':$index==selectedIndex}") Add Review
 
             div.text-center
-                h1 Enter New Information Here
+                h4.spacing Create a Review
                 form
                     .row
                         .large-12.columns
-                            input(type="text",placeholder="Name",ng-model="data.name")
-                            input(type="text",placeholder="Address",ng-model="data.address")
-                            input(type="text",placeholder="Phone",ng-model="data.phone")
-                            input(type="text",placeholder="Reviewer",ng-model="data.reviewer")
-                            input(type="text",placeholder="Stars",ng-model="data.stars")
+                            label.text-left Pharmacy Name
+                            input(type="text",placeholder="Pharmacy Name",ng-model="data.name")
+                            label.text-left Pharmacy Address
+                            input(type="text",placeholder="Pharmacy Address",ng-model="data.address")
+                            label.text-left Pharmacy Phone Number
+                            input(type="text",placeholder="Pharmacy Phone Number",ng-model="data.phone")
+                            label.text-left Reviewer (you)
+                            input(type="text",placeholder="Reviewer (you)",ng-model="data.reviewer")
+                            label.text-left Stars
+                            select(type="text",ng-model="data.stars")
+                                span.prefix Stars
+                                option(value = "5") 5
+                                option(value = "4") 4
+                                option(value = "3") 3
+                                option(value = "2") 2
+                                option(value = "1") 1
+                            label.text-left Impression
                             input(type="text",placeholder="Impression",ng-model="data.impression")
-                            button(type="submit", ng-click="createPharm()") Add
+                            button.small(type="submit", ng-click="createPharm()") Add Review
 
         script(src="./assets/jquery.min.js")        
         script(src="./assets/angular.min.js")

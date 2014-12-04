@@ -62,8 +62,14 @@ syringeApp.controller('SearchCtrl', ['$scope', '$http', 'Pharmacy', function($sc
     
     //HIGHLIGHT DIV ======================
     $scope.highlightDiv = function($index) {
-        $scope.selectedIndex = $index;
+        if($scope.selectedIndex == $index)
+            $scope.selectedIndex = -1;
+        else
+            $scope.selectedIndex = $index;
     };
-
+    
+    $scope.high = function(location){
+        console.log(location)
+    };
 
 }]);
