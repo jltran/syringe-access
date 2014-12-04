@@ -28,5 +28,5 @@
     require('./app/routes')(app);
 
     // app start =================================
-    app.listen(8888);
-    console.log('app listening at port: 8888');
+    app.listen(80);
+    console.log('app listening at port: 80');
