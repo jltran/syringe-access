@@ -48,23 +48,22 @@ html
 
             div.text-center
                 h4.spacing Create a Review
-                form
+                form(name="inputForm")
                     .row
                         .large-12.columns
                             label.text-left Pharmacy Name
-                            input(type="text",placeholder="Pharmacy Name",ng-model="data.name")
+                            input(type="text",placeholder="Pharmacy Name",ng-model="data.name" required)
                             label.text-left Pharmacy Address
                             input(type="text",placeholder="Pharmacy Address",ng-model="data.address")
                             label.text-left Pharmacy Phone Number
                             input(type="text",placeholder="Pharmacy Phone Number",ng-model="data.phone")
                             label.text-left Reviewer (you)
-                            input(type="text",placeholder="Reviewer (you)",ng-model="data.reviewer")
+                            input(type="text",placeholder="Reviewer (you)",ng-model="data.reviewer" required)
                             label.text-left Stars
-                            select(ng-model="data.stars" ng-options="star for (star, rate) in ratings")
+                            select(ng-model="data.stars" ng-options="star for (star, rate) in ratings" required)
                             label.text-left Impression
                             input(type="text",placeholder="Impression",ng-model="data.impression")
-                            button.small(type="submit", ng-click="createPharm()") Add Review
-                            {{data.stars}}
+                            button.small(type="submit", ng-click="createPharm()" ng-disabled="inputForm.$invalid") Add Review
 
         script(src="./assets/jquery.min.js")        
         script(src="./assets/angular.min.js")

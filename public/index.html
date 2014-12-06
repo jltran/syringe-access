@@ -57,22 +57,22 @@
       </div>
       <div class="text-center">
         <h4 class="spacing">Create a Review</h4>
-        <form>
+        <form name="inputForm">
           <div class="row">
             <div class="large-12 columns">
               <label class="text-left">Pharmacy Name</label>
-              <input type="text" placeholder="Pharmacy Name" ng-model="data.name">
+              <input type="text" placeholder="Pharmacy Name" ng-model="data.name" required>
               <label class="text-left">Pharmacy Address</label>
               <input type="text" placeholder="Pharmacy Address" ng-model="data.address">
               <label class="text-left">Pharmacy Phone Number</label>
               <input type="text" placeholder="Pharmacy Phone Number" ng-model="data.phone">
               <label class="text-left">Reviewer (you)</label>
-              <input type="text" placeholder="Reviewer (you)" ng-model="data.reviewer">
+              <input type="text" placeholder="Reviewer (you)" ng-model="data.reviewer" required>
               <label class="text-left">Stars</label>
-              <select ng-model="data.stars" ng-options="star for (star, rate) in ratings"></select>
+              <select ng-model="data.stars" ng-options="star for (star, rate) in ratings" required></select>
               <label class="text-left">Impression</label>
               <input type="text" placeholder="Impression" ng-model="data.impression">
-              <button type="submit" ng-click="createPharm()" class="small">Add Review</button>{{data.stars}}
+              <button type="submit" ng-click="createPharm()" ng-disabled="inputForm.$invalid" class="small">Add Review</button>
             </div>
           </div>
         </form>
