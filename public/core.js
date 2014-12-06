@@ -18,12 +18,7 @@ syringeApp.factory('Pharmacy', ['$http', function($http) {
 syringeApp.controller('SearchCtrl', ['$scope', '$http', 'Pharmacy', function($scope, $http, Pharmacy){
     $scope.data = {};
     
-    $scope.ratings = [
-        {rate: '5'},
-        {rate: '4'},
-        {rate: '3'},
-        {rate: '2'},
-        {rate: '1'}];
+    $scope.ratings = {5:5,4:4,3:3,2:2,1:1};
 
     //GET ==============================
     //when landing on the front page, get all todos and show them

@@ -69,9 +69,7 @@
               <label class="text-left">Reviewer (you)</label>
               <input type="text" placeholder="Reviewer (you)" ng-model="data.reviewer">
               <label class="text-left">Stars</label>
-              <select type="text" ng-model="data.stars" ng-options="ratingOptions.rate for ratingOptions in ratings">
-                <option value="">-- choose rating --</option>
-              </select>
+              <select ng-model="data.stars" ng-options="star for (star, rate) in ratings"></select>
               <label class="text-left">Impression</label>
               <input type="text" placeholder="Impression" ng-model="data.impression">
               <button type="submit" ng-click="createPharm()" class="small">Add Review</button>

@@ -60,7 +60,7 @@ html
                             label.text-left Reviewer (you)
                             input(type="text",placeholder="Reviewer (you)",ng-model="data.reviewer")
                             label.text-left Stars
-                            select(ng-model="data.stars" ng-options="ratingOptions.rate for ratingOptions in ratings")
+                            select(ng-model="data.stars" ng-options="star for (star, rate) in ratings")
                             label.text-left Impression
                             input(type="text",placeholder="Impression",ng-model="data.impression")
                             button.small(type="submit", ng-click="createPharm()") Add Review
