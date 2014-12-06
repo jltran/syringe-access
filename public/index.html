@@ -69,12 +69,8 @@
               <label class="text-left">Reviewer (you)</label>
               <input type="text" placeholder="Reviewer (you)" ng-model="data.reviewer">
               <label class="text-left">Stars</label>
-              <select type="text" ng-model="data.stars"><span class="prefix">Stars</span>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
+              <select type="text" ng-model="data.stars" ng-options="ratingOptions.rate for ratingOptions in ratings">
+                <option value="">-- choose rating --</option>
               </select>
               <label class="text-left">Impression</label>
               <input type="text" placeholder="Impression" ng-model="data.impression">
