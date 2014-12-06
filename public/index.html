@@ -72,7 +72,7 @@
               <select ng-model="data.stars" ng-options="star for (star, rate) in ratings"></select>
               <label class="text-left">Impression</label>
               <input type="text" placeholder="Impression" ng-model="data.impression">
-              <button type="submit" ng-click="createPharm()" class="small">Add Review</button>
+              <button type="submit" ng-click="createPharm()" class="small">Add Review</button>{{data.stars}}
             </div>
           </div>
         </form>
